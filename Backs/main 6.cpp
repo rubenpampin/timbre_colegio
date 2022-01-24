@@ -308,7 +308,7 @@ void loop () {
   if (T1s==1 && T1h==hora && T1m==minuto && segundo==0){
     if (t_actual - t_ant > 15000){
      Serial.println("Enciende Alarma");
-    }
+     {
     
   }
 
