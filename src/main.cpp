@@ -50,8 +50,8 @@ byte n2 [] = {
   B00000
 };
 
-DS3231 rtc;    // correcion descomentá esta linea  borrando // para vos y comentá la proxima agregando // delante de DS1307 rtc;
-//DS1307 rtc;       // asi sirve el programa para ambas versiones 
+//DS3231 rtc;    // correcion descomentá esta linea  borrando // para vos y comentá la proxima agregando // delante de DS1307 rtc;
+DS1307 rtc;       // asi sirve el programa para ambas versiones 
 
 int segundo,minuto,hora,dia,mes;
 long anio; //variable año
@@ -141,6 +141,7 @@ void setup () {
 
   
   Serial.begin(9600);
+  delay(2000);
 
   //EEPROM.write(0, 18); // direccion dato
 
@@ -148,8 +149,14 @@ void setup () {
   //EEPROM.read (0);
 
   // recupera valores de eepron si fue guardado alguna vez 
+
+  Serial.println("Lectura de EEPROM");
+
   int lectura = EEPROM.read (0);
-  if (EEPROM.read (0) == 40){
+
+  if (lectura == 40){
+
+      Serial.println("Recupera valores de guardados");
     
     T1h = EEPROM.read (1);
     T1m = EEPROM.read (2);
@@ -186,16 +193,19 @@ void setup () {
     T9s = EEPROM.read (33);    
     T10s = EEPROM.read (34);    
     T11s = EEPROM.read (35);    
-    T12s = EEPROM.read (36);        
+    T12s = EEPROM.read (36);  
+    /*      
     Fd = EEPROM.read (37);       
     Fm = EEPROM.read (38);   
     Fa = EEPROM.read (39);
     Rh = EEPROM.read (40);
-    Rm = EEPROM.read (41);                              
+    Rm = EEPROM.read (41);  
+    */                            
 
   }
 
   else{
+     Serial.println("Pone valores de inicio");
     T1h = 8;
     T1m = 15;
     T2h = 9;
@@ -251,7 +261,7 @@ void setup () {
 
   // Esta línea establece el RTC con una fecha y hora explícitas, por ejemplo para establecer
   // 21 de enero de 2014 a las 3 a.m. llamarías:
-   rtc.adjust (DateTime (Fa, Fm, Fd,  Rh, Rm, 0));
+  // rtc.adjust (DateTime (Fa, Fm, Fd,  Rh, Rm, 0));
   //                       año, mes,dia, h, m, s
   
   
@@ -286,8 +296,19 @@ void setup () {
 
   //Recupera valores EEPROM
 
+  HoraFecha = rtc.now(); //obtenemos la hora y fecha actual en una sola linea de comando 
+  segundo=HoraFecha.second(); // guarda los segundos leidos en la variable "segundo"
+  Rm=minuto=HoraFecha.minute(); // guarda los minutos leidos en la variable "minuto"
+  Rh=hora=HoraFecha.hour(); // guarda la hora leida en la variable "hora"
+  Fd=dia=HoraFecha.day(); // guarda el día leido en la variable "dia"
+  Fm=mes=HoraFecha.month(); // guarda el mes leido en la variable "mes"
+  Fa=anio=HoraFecha.year(); // guarda el año leido en la variable "anio"
 
 
+  // Esta línea establece el RTC con una fecha y hora explícitas, por ejemplo para establecer
+  // 21 de enero de 2014 a las 3 a.m. llamarías:
+  // rtc.adjust (DateTime (Fa, Fm, Fd,  Rh, Rm, 0));
+  //                    año, mes,dia, h,  m,  s
 
 
 
@@ -719,12 +740,18 @@ void loop () {
                  EEPROM.write (34,T10s);  // AGREGADO                                  
                  EEPROM.write (35,T11s);  // AGREGADO                                  
                  EEPROM.write (36,T12s);  // AGREGADO
+                 /*
                  EEPROM.write (37,Fd);  // AGREGADO
                  EEPROM.write (38,Fm);  // AGREGADO
                  EEPROM.write (39,Fa);  // AGREGADO
                  EEPROM.write (40,Rh);  // AGREGADO
                  EEPROM.write (41,Rm);  // AGREGADO
+                 */
                  Serial.print("Memoria Grabada");
+
+                 rtc.adjust (DateTime (Fa, Fm, Fd,  Rh, Rm, 0)); // ajusta el reloj 
+
+                 contador=0;  ///Vuelve todo al comienzo 
 
 
 
@@ -2227,6 +2254,8 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("Graba cambios?"); // Imprime en Display "Timbre1:"
       lcd.setCursor(0,1);  // Mover el cursor a la columna () , fila()
       lcd.print("Presione Subir  "); // Imprime en Display "Timbre1:"
+      
+      
       
     break;
    
