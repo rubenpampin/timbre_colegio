@@ -16,6 +16,14 @@
   // DS1307 rtc;       // asi sirve el programa para ambas versiones 
 */
 
+// -------------------------------------------------------------------------
+// Modificaciones 17/02/22 
+// Se quitaron los On OFF de los timbres
+// Se agregó el funcionamiento de los timbres de 15 segundos  buscar constante (tiempo_timbre) y modificarlo si hace falta mas o menos tiempo
+// Se agrego pero esta comentado para que no suenen los timbres cuando la llave está en programación   
+
+
+
 // --------------------------------------------------------------------------
 // Correciones 16/02/22 Ruben.
 // lineas : 761, 762
@@ -66,7 +74,7 @@
   delay(200);
   Serial.println(__TIME__);  // Hora de la Computadora 
   */
-
+// -------------------------------------------------------------------------
 
 
 // -------------------------------------------------------------------------
@@ -128,6 +136,7 @@ const int  puls_sube = 4;    // ver pin si es correcto 17/12/21
 const int  puls_baja = 5;    // ver pin si es correcto 17/12/21
 const int  jumper = 6;       // 17/12/21
 const int  salida_t = 7;     // salida para el timbre
+const int  tiempo_timbre = 15; /// 
 
 int contador            = 0;   // contador para el numero de veces presionados
 int estado_pulsador_der = 0;         // estado actual del pulsador
@@ -140,18 +149,33 @@ int lastButtonState_sube = 1;     // estado anterior del pulsador
 int estado_puls_baja = 1;         // estado actual del pulsador
 int lastButtonState_baja = 1;     // estado anterior del pulsador
 
+
+
  
 //  Agregados ----------------------------- 
 int millis_ant = 0; // 16/12/21   En esta variable guardamos el estado anterior de la varaible MILLS
-int inc_seg =0;     // 16/12/21   Guarda incrementos de segundo de un contador interno
+int inc_seg = 0;     // 16/12/21   Guarda incrementos de segundo de un contador interno
 int muestra = 0;    // 16/12/21   Guarda cada cuantos segundos refrescamos el display
 long t_ant = 0;    // correccion int paso a long
-int cuarto_seg =0;  // incrementos cuartos de segundo 
-int cont_timbre =0; //
+int cuarto_seg = 0;  // incrementos cuartos de segundo 
+int cont_timbre = 0; //
+int memo_minuto = 0;
 
 //  Flags ---------------------------------
-bool flag_timbre =0; // 
-bool timbre1=0;
+bool flag_timbre = 0; // 
+bool timbre1 = 0;
+bool timbre2 = 0;
+bool timbre3 = 0;
+bool timbre4 = 0;
+bool timbre5 = 0;
+bool timbre6 = 0;
+bool timbre7 = 0;
+bool timbre8 = 0;
+bool timbre9 = 0;
+bool timbre10 = 0;
+bool timbre11 = 0;
+bool timbre12 = 0;
+
 
 
 // variables para cargar de eepron con los timbres programados 
@@ -411,26 +435,180 @@ void loop () {
     
   }
 
-  if (timbre1==0){
-      if (T1h == hora && T1m == minuto){
-          flag_timbre=1;
-          timbre1=1;
-          digitalWrite(salida_t,HIGH);
-          cont_timbre = cuarto_seg + (4*15);
-          Serial.println ("Timbre activado");
-      }
-  }
+  //  Accionamiento de timbres  -------------------------------------------
 
-
-
-  if (flag_timbre==1){
-    if (cont_timbre == cuarto_seg){
-      digitalWrite(salida_t,LOW);
-      Serial.println ("Timbre desactivado");
-      flag_timbre=0;
+//if (digitalRead (jumper) == 1){   //¿ Esta fuera de programacion ? LLAVE NO ACCIONADA esto hará que no suene cuando está en programacion
+    if (timbre1==0){
+        if (T1h == hora && T1m == minuto){
+            flag_timbre=1;
+            timbre1=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
     }
-  }
 
+    if (timbre2==0){
+        if (T2h == hora && T2m == minuto){
+            flag_timbre=1;
+            timbre2=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
+    }
+
+    if (timbre3==0){
+        if (T3h == hora && T3m == minuto){
+            flag_timbre=1;
+            timbre3=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
+    } 
+
+    if (timbre4==0){
+        if (T4h == hora && T4m == minuto){
+            flag_timbre=1;
+            timbre4=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
+    }
+
+    if (timbre5==0){
+        if (T5h == hora && T5m == minuto){
+            flag_timbre=1;
+            timbre5=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
+    }
+
+    if (timbre6==0){
+        if (T6h == hora && T6m == minuto){
+            flag_timbre=1;
+            timbre6=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
+    }
+
+    if (timbre7==0){
+        if (T7h == hora && T7m == minuto){
+            flag_timbre=1;
+            timbre7=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
+    }
+
+    if (timbre8==0){
+        if (T8h == hora && T8m == minuto){
+            flag_timbre=1;
+            timbre8=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
+    }
+
+    if (timbre9==0){
+        if (T9h == hora && T9m == minuto){
+            flag_timbre=1;
+            timbre9=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
+    }
+
+    if (timbre10==0){
+        if (T10h == hora && T10m == minuto){
+            flag_timbre=1;
+            timbre10=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
+    }
+
+    if (timbre11==0){
+        if (T11h == hora && T11m == minuto){
+            flag_timbre=1;
+            timbre11=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
+    }
+
+    if (timbre12==0){
+        if (T12h == hora && T12m == minuto){
+            flag_timbre=1;
+            timbre12=1;
+            digitalWrite(salida_t,HIGH);
+            cont_timbre = cuarto_seg + (4*tiempo_timbre);
+            Serial.println ("Timbre activado");
+            memo_minuto=minuto;
+        }
+    }
+
+  // }  // LLave de jumper de programacion  quiatar comentario si se habilita Jumper de programacion
+
+
+  // general para todos los timbres  
+    if (flag_timbre==1){
+      if (cont_timbre == cuarto_seg){
+        digitalWrite(salida_t,LOW);
+        Serial.println ("Timbre desactivado");
+        flag_timbre=0;
+      }
+    }
+
+
+    if(memo_minuto != minuto){    // habilita nuevamnente al cambiar el minuto esto evita que se recicle 
+        timbre1=0;                // mientras el minuto cambió 
+        timbre2=0;
+        timbre3=0;
+        timbre4=0;
+        timbre5=0;
+        timbre6=0;
+        timbre7=0;
+        timbre8=0;
+        timbre9=0;
+        timbre10=0;
+        timbre11=0;
+        timbre12=0;
+
+    }
+
+
+
+
+
+//}
+
+
+
+
+ // Fin Accionamiento Timbres ----------------------------------------------
 
 /*
   if (T1s==1 && T1h==hora && T1m==minuto && segundo==0)
@@ -796,9 +974,9 @@ void loop () {
                  EEPROM.write (40,Rh);  // AGREGADO
                  EEPROM.write (41,Rm);  // AGREGADO
                  */
-                 Serial.print("Memoria Grabada");
+                 Serial.println("Memoria Grabada");
 
-                 rtc.adjust (DateTime (Fa, Fm, Fd,  Rh, Rm, 0)); // ajusta el reloj 
+                 rtc.adjust (DateTime (Fa, Fm, Fd,  Rh, Rm, segundo)); // ajusta el reloj 
 
                  contador=0;  ///Vuelve todo al comienzo 
 
