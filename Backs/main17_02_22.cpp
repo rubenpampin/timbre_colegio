@@ -82,7 +82,7 @@
 
 LiquidCrystal_I2C lcd (0x27, 16,2);  //
 
-byte flecha [] = { // ->
+byte flecha [] = {
   B01000,
   B00100,
   B00010,
@@ -104,7 +104,7 @@ byte campana [] = {
   B00000
 };
 
-byte n2 [] = {    // Ñ 
+byte n2 [] = {
   B11111,
   B00000,
   B10001,
@@ -115,8 +115,8 @@ byte n2 [] = {    // Ñ
   B00000
 };
 
-//DS3231 rtc;    // correcion descomentá esta linea  borrando // para vos y comentá la proxima agregando // delante de DS1307 rtc;
-DS1307 rtc;       // asi sirve el programa para ambas versiones 
+DS3231 rtc;    // correcion descomentá esta linea  borrando // para vos y comentá la proxima agregando // delante de DS1307 rtc;
+//DS1307 rtc;       // asi sirve el programa para ambas versiones 
 
 int segundo,minuto,hora,dia,mes;
 long anio; //variable año
@@ -380,15 +380,7 @@ void setup () {
   Fm=mes=HoraFecha.month(); // guarda el mes leido en la variable "mes"
   Fa=anio=HoraFecha.year(); // guarda el año leido en la variable "anio"
 
- // Serial.println (Fa);
 
- // delay (2000);
-
-/*
-  Fa = 2045;
-
-   rtc.adjust (DateTime (Fa, Fm, Fd,  Rh, Rm, 0)); // ajusta el reloj 
-*/
   // Esta línea establece el RTC con una fecha y hora explícitas, por ejemplo para establecer
   // 21 de enero de 2014 a las 3 a.m. llamarías:
   // rtc.adjust (DateTime (Fa, Fm, Fd,  Rh, Rm, 0));
@@ -469,8 +461,8 @@ void loop () {
       // que pase de off a on:
       contador++;
         if (digitalRead (jumper) == 0){   //¿ esta en programacion ? 
-             if (contador>=37){
-                 contador=36;  // segundo limite para programación
+             if (contador>=49){
+                 contador=48;  // segundo limite para programación
              }
         }
         else{
@@ -478,15 +470,6 @@ void loop () {
             contador = 6;         // aqui queda en el maximo valor no estando en programacion  
           }
 
-        }
-        if (contador==34){
-          HoraFecha = rtc.now(); //obtenemos la hora y fecha actual en una sola linea de comando 
-          segundo=HoraFecha.second(); // guarda los segundos leidos en la variable "segundo"
-          Rm=minuto=HoraFecha.minute(); // guarda los minutos leidos en la variable "minuto"
-          Rh=hora=HoraFecha.hour(); // guarda la hora leida en la variable "hora"
-          Fd=dia=HoraFecha.day(); // guarda el día leido en la variable "dia"
-          Fm=mes=HoraFecha.month(); // guarda el mes leido en la variable "mes"
-          Fa=anio=HoraFecha.year(); // guarda el año leido en la variable "anio"
         }
 
      
@@ -548,210 +531,281 @@ void loop () {
                 }
             break;
 
-        
-
             case(9):
+                T1s++;
+                if(T1s>=2){
+                  T1s=1;
+                }
+            break;            
+
+            case(10):
                 T2h++;
                 if(T2h>=25){
                   T2h=24;
                 }
             break;
 
-            case(10):
+            case(11):
                 T2m++;
                 if(T2m>=60){
                   T2m=59;
                 }
             break;
 
+            case(12):
+                T2s++;
+                if(T2s>=2){
+                  T2s=1;
+                }
+            break;            
 
-            case(11):
+            case(13):
                 T3h++;
                 if(T3h>=25){
                   T3h=24;
                 }
             break;
 
-            case(12):
+            case(14):
                 T3m++;
                 if(T3m>=60){
                   T3m=59;
                 }
             break;
-    
 
-            case(13):
+            case(15):
+                T3s++;
+                if(T3s>=2){
+                  T3s=1;
+                }
+            break;            
+
+            case(16):
                 T4h++;
                 if(T4h>=25){
                   T4h=24;
                 }
             break;
 
-            case(14):
+            case(17):
                 T4m++;
                 if(T4m>=60){
                   T4m=59;
                 }
             break;
 
+            case(18):
+                T4s++;
+                if(T4s>=2){
+                  T4s=1;
+                }
+            break;            
 
-            case(15):
+            case(19):
                 T5h++;
                 if(T5h>=25){  //MODIFICACION
                   T5h=24; // MODIFICACION
                 }
             break;
 
-            case(16):
+            case(20):
                 T5m++;
                 if(T5m>=60){
                   T5m=59;
                 }
             break;
-   
+
+            case(21):
+                T5s++;
+                if(T5s>=2){
+                  T5s=1;
+                }
+            break;            
 
 
-            case(17):
+            case(22):
                 T6h++;
                 if(T6h>=25){
                   T5h=24;
                 }
             break;
 
-            case(18):
+            case(23):
                 T6m++;
                 if(T6m>=60){
                   T6m=59;
                 }
             break;
 
-            case(19): // AGREGADO
+            case(24):
+                T6s++;
+                if(T6s>=2){
+                  T6s=1;
+                }
+            break;            
+
+            case(25): // AGREGADO
                 T7h++;
                 if(T7h>=25){
                   T7h=24;
                 }
             break;
 
-            case(20):  // AGREGADO
+            case(26):  // AGREGADO
                 T7m++;
                 if(T7m>=60){
                   T7m=59;
                 }
             break;
 
-              
+            case(27):
+                T7s++;
+                if(T7s>=2){
+                  T7s=1;
+                }
+            break;            
 
-            case(21):  // AGREGADO
+            case(28):  // AGREGADO
                 T8h++;
                 if(T8h>=25){
                   T8h=24;
                 }
             break;
 
-            case(22):  // AGREGADO
+            case(29):  // AGREGADO
                 T8m++;
                 if(T8m>=60){
                   T8m=59;
                 }
             break;
-   
 
-            case(23):  // AGREGADO
+            case(30):
+                T8s++;
+                if(T8s>=2){
+                  T8s=1;
+                }
+            break;            
+
+            case(31):  // AGREGADO
                 T9h++;
                 if(T9h>=25){
                   T9h=24;
                 }
             break;
 
-            case(24):  // AGREGADO
+            case(32):  // AGREGADO
                 T9m++;
                 if(T9m>=60){
                   T9m=59;
                 }
             break;
 
+            case(33):
+                T9s++;
+                if(T9s>=2){
+                  T9s=1;
+                }
+            break;            
 
-            case(25):  // AGREGADO
+            case(34):  // AGREGADO
                 T10h++;
                 if(T10h>=25){
                   T10h=24;
                 }
             break;
 
-            case(26):  // AGREGADO
+            case(35):  // AGREGADO
                 T10m++;
                 if(T10m>=60){
                   T10m=59;
                 }
             break;
 
+            case(36):
+                T10s++;
+                if(T10s>=2){
+                  T10s=1;
+                }
+            break;            
 
-            case(27):  // AGREGADO
+            case(37):  // AGREGADO
                 T11h++;
                 if(T11h>=25){
                   T11h=24;
                 }
             break;
 
-            case(28):  // AGREGADO
+            case(38):  // AGREGADO
                 T11m++;
                 if(T11m>=60){
                   T11m=59;
                 }
             break;
 
+            case(39):
+                T11s++;
+                if(T11s>=2){
+                  T11s=1;
+                }
+            break;            
 
-            case(29):  // AGREGADO
+            case(40):  // AGREGADO
                 T12h++;
                 if(T12h>=25){
                   T12h=24;
                 }
             break;
 
-            case(30):  // AGREGADO
+            case(41):  // AGREGADO
                 T12m++;
                 if(T12m>=60){
                   T12m=59;
                 }
             break;
 
+            case(42):
+                T12s++;
+                if(T12s>=2){
+                  T12s=1;
+                }
+            break;            
 
-            case(31):
+            case(43):
                 Fd++;
                 if(Fd>=32){
                   Fd=31;
                 }
             break;            
 
-            case(32):
+            case(44):
                 Fm++;
                 if(Fd>=13){
                   Fd=12;
                 }
             break;     
 
-            case(33):
+            case(45):
                 Fa++;
                 if(Fa>=2201){
                   Fa=2200;
                 }
             break;                
 
-            case(34):
+            case(46):
                 Rh++;
                 if(Rh>=25){
                   Rh=24;
                 }
             break;  
 
-            case(35):
+            case(47):
                 Rm++;
                 if(Rm>=60){
                   Rm=59;
                 }
             break;                         
 
-            case(36):
+            case(48):
                  EEPROM.write (0,40);
                  EEPROM.write (1,T1h);
                  EEPROM.write (2,T1m);
@@ -817,7 +871,7 @@ void loop () {
   lastButtonState_sube  = estado_puls_sube;
   
   
-/*
+
    switch (contador)
  {
 
@@ -825,7 +879,7 @@ void loop () {
      break;
      
  }
-*/
+
 
 // --------------------------------------------------------- 
 // Boton Bajar
@@ -849,200 +903,275 @@ void loop () {
                 if(T1m<0){
                   T1m=0;
                 }
-            break; //---------------------------
-
+            break;
 
             case(9):
+                T1s--;
+                if(T1s<0){
+                  T1s=0;
+                }
+            break;
+
+            case(10):
                 T2h--;
                 if(T2h<0){
                   T2h=0;
                 }
-            break; //------------------------------
+            break;
 
-            case(10):
+            case(11):
                 T2m--;
                 if(T2m<0){
                   T2m=0;
                 }
             break;
 
+            case(12):
+                T2s--;
+                if(T2s<0){
+                  T2s=0;
+                }
+            break;
 
-            case(11):
+            case(13):
                 T3h--;
                 if(T3h<0){
                   T3h=0;
                 }
             break;
 
-            case(12):
+            case(14):
                 T3m--;
                 if(T3m<0){
                   T3m=0;
                 }
-            break; // ----------------------------------
+            break;
 
+            case(15):
+                T3s--;
+                if(T3s<0){
+                  T3s=0;
+                }
+            break;
 
-            case(13):
+            case(16):
                 T4h--;
                 if(T4h<0){
                   T4h=0;
                 }
-            break; // -----------------------------------
+            break;
 
-            case(14):
+            case(17):
                 T4m--;
                 if(T4m<0){
                   T4m=0;
                 }
             break;
 
-        
-            case(15):
+            case(18):
+                T4s--;
+                if(T4s<0){
+                  T4s=0;
+                }
+            break;
+
+            case(19):
                 T5h--;
                 if(T5h<0){
                   T5h=0;
                 }
             break;
 
-            case(16):
+            case(20):
                 T5m--;
                 if(T5m<0){
                   T5m=0;
                 }
-            break; // ----------------------------------
+            break;
 
+            case(21):
+                T5s--;
+                if(T5s<0){
+                  T5s=0;
+                }
+            break;
 
-            case(17):
+            case(22):
                 T6h--;
                 if(T6h<0){
                   T6h=0;
                 }
-            break; //----------------------------------
+            break;
 
-            case(18):
+            case(23):
                 T6m--;
                 if(T6m<0){
                   T6m=0;
                 }
             break;
 
+            case(24):
+                T6s--;
+                if(T6s<0){
+                  T6s=0;
+                }
+            break;
 
-            case(19):  // AGREGADO
+            case(25):  // AGREGADO
                 T7h--;
                 if(T7h<0){
                   T7h=0;
                 }
             break;
 
-            case(20):  // AGREGADO
+            case(26):  // AGREGADO
                 T7m--;
                 if(T7m<0){
                   T7m=0;
                 }
-            break; //------------------------------------
+            break;
 
+            case(27):
+                T7s--;
+                if(T7s<0){
+                  T7s=0;
+                }
+            break;
 
-            case(21):  // AGREGADO
+            case(28):  // AGREGADO
                 T8h--;
                 if(T8h<0){
                   T8h=0;
                 }
-            break; //--------------------------------------
+            break;
 
-            case(22):  // AGREGADO
+            case(29):  // AGREGADO
                 T8m--;
                 if(T8m<0){
                   T8m=0;
                 }
             break;
 
-            case(23):  // AGREGADO
+            case(30):
+                T8s--;
+                if(T8s<0){
+                  T8s=0;
+                }
+            break;
+
+            case(31):  // AGREGADO
                 T9h--;
                 if(T9h<0){
                   T9h=0;
                 }
             break;
 
-            case(24):  // AGREGADO
+            case(32):  // AGREGADO
                 T9m--;
                 if(T9m<0){
                   T9m=0;
                 }
-            break; //--------------------------------------
+            break;
 
+            case(33):
+                T9s--;
+                if(T9s<0){
+                  T9s=0;
+                }
+            break;
 
-            case(25):  // AGREGADO
+            case(34):  // AGREGADO
                 T10h--;
                 if(T10h<0){
                   T10h=0;
                 }
-            break; // --------------------------------------
+            break;
 
-            case(26):  // AGREGADO
+            case(35):  // AGREGADO
                 T10m--;
                 if(T10m<0){
                   T10m=0;
                 }
             break;
 
+            case(36):
+                T10s--;
+                if(T10s<0){
+                  T10s=0;
+                }
+            break;
 
-            case(27):  // AGREGADO
+            case(37):  // AGREGADO
                 T11h--;
                 if(T11h<0){
                   T11h=0;
                 }
             break;
 
-            case(28):  // AGREGADO
+            case(38):  // AGREGADO
                 T11m--;
                 if(T11m<0){
                   T11m=0;
                 }
-            break; //----------------------------------------
+            break;
 
-            case(29):  // AGREGADO
+            case(39):
+                T11s--;
+                if(T11s<0){
+                  T11s=0;
+                }
+            break;
+
+            case(40):  // AGREGADO
                 T12h--;
                 if(T12h<0){
                   T12h=0;
                 }
-            break; //-----------------------------------------
+            break;
 
-            case(30):  // AGREGADO
+            case(41):  // AGREGADO
                 T12m--;
                 if(T12m<0){
                   T12m=0;
                 }
             break;
 
-            case(31):
+            case(42):
+                T12s--;
+                if(T12s<0){
+                  T12s=0;
+                }
+            break;
+
+            case(43):
                 Fd--;
                 if(Fd<1){
                   Fd=1;
                 }
             break;
 
-            case(32):
+            case(44):
                 Fm--;
                 if(Fm<1){
                   Fm=1;
                 }
-            break; //-----------------------------------------
+            break;
 
-            case(33):
+            case(45):
                 Fa--;
                 if(Fa<2022){
                   Fa=2022;
                 }
             break;
 
-            case(34):
+            case(46):
                 Rh--;
                 if(Rh<0){
                   Rh=0;
                 }
-            break; //-----------------------------------------
+            break;
 
-            case(35):
+            case(47):
                 Rm--;
                 if(Rm<0){
                   Rm=0;
@@ -1426,7 +1555,13 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T1m);
       lcd.setCursor (13,1);
-      
+      if (T1s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
     case 8:  // muestra los Timbres horas y minutos paso a paso
@@ -1441,11 +1576,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T1m);
       lcd.setCursor (13,1);
-    
+      if (T1s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 9:  // muestra los Timbres horas y minutos paso a pasob----------------------
-   
+    case 9:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T1"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T1h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T1m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T1s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
+    break;
+
+    case 10:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T2"); // Imprime en Display "Timbre1:"
@@ -1457,10 +1618,16 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T2m);
       lcd.setCursor (13,1);
-    
+      if (T2s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 10:  // muestra los Timbres horas y minutos paso a paso
+    case 11:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T2"); // Imprime en Display "Timbre1:"
@@ -1472,11 +1639,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T2m);
       lcd.setCursor (13,1);
-     
+      if (T2s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }      
     break;
 
+    case 12:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T2"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T2h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T2m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T2s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
 
-    case 11:  // muestra los Timbres horas y minutos paso a paso
+      }
+    break;
+
+    case 13:  // muestra los Timbres horas y minutos paso a paso
     lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T3"); // Imprime en Display "Timbre1:"
@@ -1488,10 +1681,16 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T3m);
       lcd.setCursor (13,1);
-    
+      if (T3s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 12:  // muestra los Timbres horas y minutos paso a paso
+    case 14:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T3"); // Imprime en Display "Timbre1:"
@@ -1503,11 +1702,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T3m);
       lcd.setCursor (13,1);
-      
+      if (T3s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
+    case 15:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T3"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T3h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T3m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T3s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
 
-    case 13:  // muestra los Timbres horas y minutos paso a paso -----------------------------------------
+      }
+    break;
+
+    case 16:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T4"); // Imprime en Display "Timbre1:"
@@ -1519,10 +1744,16 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T4m);       
       lcd.setCursor (13,1);
-   
+      if (T4s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 14:  // muestra los Timbres horas y minutos paso a paso
+    case 17:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T4"); // Imprime en Display "Timbre1:"
@@ -1534,11 +1765,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T4m);        
       lcd.setCursor (13,1);
-  
+      if (T4s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
+    case 18:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T4"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T4h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T4m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T4s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
 
-    case 15:  // muestra los Timbres horas y minutos paso a paso --------------------------------
+      }
+    break;
+
+    case 19:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T5"); // Imprime en Display "Timbre1:"
@@ -1550,10 +1807,16 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T5m);       
       lcd.setCursor (13,1);
-    
+      if (T5s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 16:  // muestra los Timbres horas y minutos paso a paso
+    case 20:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T5"); // Imprime en Display "Timbre1:"
@@ -1565,10 +1828,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T5m);        
       lcd.setCursor (13,1);
-   
+      if (T5s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 17:  // muestra los Timbres horas y minutos paso a paso -----------------------------------
+    case 21:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T5"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T5h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T5m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T5s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
+    break;
+
+    case 22:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T6"); // Imprime en Display "Timbre1:"
@@ -1580,10 +1870,16 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T6m);       
       lcd.setCursor (13,1);
-   
+      if (T6s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 18:  // muestra los Timbres horas y minutos paso a paso
+    case 23:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T6"); // Imprime en Display "Timbre1:"
@@ -1595,11 +1891,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T6m);        
       lcd.setCursor (13,1);
-     
+      if (T6s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
+    case 24:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T6"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T6h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T6m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T6s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
 
-    case 19:  // muestra los Timbres horas y minutos paso a paso -------------------------------
+      }
+    break;
+
+    case 25:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T7"); // Imprime en Display "Timbre1:"
@@ -1611,10 +1933,16 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T7m);       
       lcd.setCursor (13,1);
-     
+      if (T7s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 20:  // muestra los Timbres horas y minutos paso a paso
+    case 26:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T7"); // Imprime en Display "Timbre1:"
@@ -1626,9 +1954,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T7m);        
       lcd.setCursor (13,1);
-   
+      if (T7s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
-    case 21:  // muestra los Timbres horas y minutos paso a paso ---------------------
+
+    case 27:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T7"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T7h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T7m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T7s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
+    break;
+
+    case 28:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T8"); // Imprime en Display "Timbre1:"
@@ -1640,10 +1996,16 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T8m);       
       lcd.setCursor (13,1);
-   
+      if (T8s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 22:  // muestra los Timbres horas y minutos paso a paso
+    case 29:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T8"); // Imprime en Display "Timbre1:"
@@ -1655,10 +2017,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T8m);        
       lcd.setCursor (13,1);
-    
+      if (T8s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 23:  // muestra los Timbres horas y minutos paso a paso ---------------------------------
+    case 30:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T8"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T8h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T8m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T8s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
+    break;
+
+    case 31:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T9"); // Imprime en Display "Timbre1:"
@@ -1670,10 +2059,16 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T9m);       
       lcd.setCursor (13,1);
-    
+      if (T9s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 24:  // muestra los Timbres horas y minutos paso a paso
+    case 32:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T9"); // Imprime en Display "Timbre1:"
@@ -1685,10 +2080,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T9m);        
       lcd.setCursor (13,1);
-  
+      if (T9s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 25:  // muestra los Timbres horas y minutos paso a paso ---------------------------------
+    case 33:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T9"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T9h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T9m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T9s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
+    break;
+
+    case 34:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T10"); // Imprime en Display "Timbre1:"
@@ -1699,10 +2121,17 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.setCursor (7,1);
       lcd.print("M:");
       lcd.print(T10m);       
-    
+      lcd.setCursor (13,1);
+      if (T10s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 26:  // muestra los Timbres horas y minutos paso a paso
+    case 35:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T10"); // Imprime en Display "Timbre1:"
@@ -1714,10 +2143,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T10m);        
       lcd.setCursor (13,1);
-     
+      if (T10s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 27:  // muestra los Timbres horas y minutos paso a paso -----------------------
+    case 36:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T10"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T10h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T10m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T10s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
+    break;
+
+    case 37:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T11"); // Imprime en Display "Timbre1:"
@@ -1729,10 +2185,16 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T11m);       
       lcd.setCursor (13,1);
-     
+      if (T11s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 28:  // muestra los Timbres horas y minutos paso a paso
+    case 38:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T11"); // Imprime en Display "Timbre1:"
@@ -1744,10 +2206,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T11m);        
       lcd.setCursor (13,1);
-    
+      if (T11s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 29:  // muestra los Timbres horas y minutos paso a paso --------------------------------------------
+    case 39:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T11"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T11h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T11m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T11s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
+    break;
+
+    case 40:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T12"); // Imprime en Display "Timbre1:"
@@ -1759,10 +2248,16 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T12m);       
       lcd.setCursor (13,1);
-     
+      if (T12s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 30:  // muestra los Timbres horas y minutos paso a paso
+    case 41:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("PROGRAMACION T12"); // Imprime en Display "Timbre1:"
@@ -1774,10 +2269,37 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       lcd.print("M:");
       lcd.print(T12m);        
       lcd.setCursor (13,1);
-   
+      if (T12s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
     break;
 
-    case 31:  // muestra los Timbres horas y minutos paso a paso
+    case 42:  // muestra los Timbres horas y minutos paso a paso
+      lcd.clear();
+      lcd.home (); // Mover el cursor a la fila (0) columna (0)
+      lcd.print("PROGRAMACION T12"); // Imprime en Display "Timbre1:"
+      lcd.setCursor(1,1);
+      lcd.print("H:");
+      lcd.print(T12h);
+      lcd.setCursor (7,1);
+      lcd.print("M:");
+      lcd.print(T12m);
+      lcd.setCursor (12,1);
+      lcd.write(byte(0));
+      if (T12s == 1){
+        lcd.print("ON");
+      }
+      else {
+        lcd.print("OFF");
+
+      }
+    break;
+
+    case 43:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("  FIJAR FECHA"); // Imprime en Display "Timbre1:"
@@ -1788,7 +2310,7 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       
     break;
 
-    case 32:  // muestra los Timbres horas y minutos paso a paso ----------------------------------------
+    case 44:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("  FIJAR FECHA"); // Imprime en Display "Timbre1:"
@@ -1799,7 +2321,7 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       
     break;
 
-    case 33:  // muestra los Timbres horas y minutos paso a paso
+    case 45:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("  FIJAR FECHA"); // Imprime en Display "Timbre1:"
@@ -1812,7 +2334,7 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       
     break;
 
-    case 34:  // muestra los Timbres horas y minutos paso a paso
+    case 46:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("   FIJAR HORA"); // Imprime en Display "Timbre1:"
@@ -1826,7 +2348,7 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
       
     break;
 
-    case 35:  // muestra los Timbres horas y minutos paso a paso
+    case 47:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("   FIJAR HORA"); // Imprime en Display "Timbre1:"
@@ -1840,7 +2362,7 @@ if (muestra == 4) {   // si pasaron 5 segundos va a entrar en la rutina de mostr
 
     break;        
 
-    case 36:  // muestra los Timbres horas y minutos paso a paso
+    case 48:  // muestra los Timbres horas y minutos paso a paso
       lcd.clear();
       lcd.home (); // Mover el cursor a la fila (0) columna (0)
       lcd.print("Graba cambios?"); // Imprime en Display "Timbre1:"
