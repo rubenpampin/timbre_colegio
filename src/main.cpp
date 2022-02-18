@@ -21,7 +21,7 @@
 // Se quitaron los On OFF de los timbres
 // Se agregó el funcionamiento de los timbres de 15 segundos  buscar constante (tiempo_timbre) y modificarlo si hace falta mas o menos tiempo
 // Se agrego pero esta comentado para que no suenen los timbres cuando la llave está en programación   
-
+// Buscar if (digitalRead (jumper) == 1) Linea 440
 
 
 // --------------------------------------------------------------------------
